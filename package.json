@@ -1,7 +1,7 @@
 {
   "name": "301-lab-06",
   "version": "1.0.0",
-  "description": "Author: Your Name Goes Here Version: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)",
+  "description": "Author: Bhagirath Bhatt Version: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)",
   "main": "server.js",
   "dependencies": {
     "cors": "^2.8.5",
