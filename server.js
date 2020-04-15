@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express'); 
 const cors = require('cors');
 const app = express();
+const superagent = require('superagent');
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,7 +18,8 @@ let weatherArray = [];
 app.get('/location', locationFunction);
 function locationFunction (request, response) {
   try{
-  const geoData = require('./data/geo.json');
+  const url = 'https://us1.locationiq.com/v1/search.php';
+  // const geoData = require('./data/geo.json');
   const city = request.query.city;
   const locationData = new Location(city, geoData);
   
@@ -31,7 +33,11 @@ response.status(200).json(locationData);
 //getting the weather forecast for location
 app.get('/weather', (request, response) => {
   try {
-    const weatherData = require('./data/darksky.json');
+    const weatherApi = process.env.DARKSKY_API_KEY;
+    let {latitude,} = request.query;
+    let {longitude} = request.query;
+    const weatherUrl = 'https://api.darksky.net/forecast/';
+    // const weatherData = require('./data/darksky.json');
     // const weatherBuilder = new WeatherConstructor(daily, weatherData);
     weatherData.daily.data.forEach(obj =>{
       weatherArray.push(new WeatherConstructor (obj.time, obj.summary));
